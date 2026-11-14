@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080a10">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="IslandPad">
+  <meta name="description" content="A Dynamic Island-inspired activity hub for iPad.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+  <title>IslandPad</title>
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">IPAD ACTIVITY HUB</div>
+        <h1>Island<span>Pad</span></h1>
+      </div>
+      <button class="icon-button" id="installBtn" aria-label="Install IslandPad" hidden>
+        <svg viewBox="0 0 24 24"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 17v3h14v-3"/></svg>
+      </button>
+    </header>
+
+    <section class="island-wrap">
+      <button class="island" id="island" aria-expanded="true">
+        <span class="island-leading" id="islandIcon"><span class="live-dot"></span></span>
+        <span class="island-summary">
+          <span class="island-title" id="islandTitle">IslandPad ready</span>
+          <span class="island-subtitle" id="islandSubtitle">Your activities, one place</span>
+        </span>
+        <span class="island-trailing" id="islandTrailing">⌃</span>
+      </button>
+      <div class="island-panel" id="islandPanel">
+        <div class="panel-topline"><span id="panelMode">ACTIVITY CENTER</span><span class="status-pill"><i></i> READY</span></div>
+        <div class="hero-row">
+          <div class="hero-art" id="heroArt"><span class="art-symbol">✦</span></div>
+          <div class="hero-copy">
+            <div class="hero-label" id="heroLabel">WELCOME BACK</div>
+            <div class="hero-title" id="heroTitle">Make room for focus.</div>
+            <div class="hero-detail" id="heroDetail">Choose an activity below to get started.</div>
+          </div>
+        </div>
+        <div class="panel-divider"></div>
+        <div class="quick-stats">
+          <div><span class="stat-label">LOCAL TIME</span><strong id="clock">--:--</strong></div>
+          <div><span class="stat-label">SESSION</span><strong id="sessionStat">Standby</strong></div>
+          <div><span class="stat-label">WEATHER</span><strong id="weatherStat">Not set</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <nav class="tabs" aria-label="Activities">
+      <button class="tab active" data-tab="home"><span>⌂</span>Overview</button>
+      <button class="tab" data-tab="music"><span>♫</span>Music</button>
+      <button class="tab" data-tab="timer"><span>◷</span>Timer</button>
+      <button class="tab" data-tab="weather"><span>☼</span>Weather</button>
+    </nav>
+
+    <section class="view active" id="view-home">
+      <div class="section-heading"><div><div class="eyebrow">YOUR SPACE</div><h2>What’s happening?</h2></div><span class="date-chip" id="dateChip">TODAY</span></div>
+      <div class="feature-grid">
+        <button class="feature-card music-card" data-open="music">
+          <span class="card-icon">♫</span><span class="card-kicker">LISTEN</span><strong>Music player</strong><small>Play local audio with artwork and a live visualizer.</small><span class="card-arrow">↗</span>
+        </button>
+        <button class="feature-card timer-card" data-open="timer">
+          <span class="card-icon">◷</span><span class="card-kicker">FOCUS</span><strong>Timer & stopwatch</strong><small>Start a session and keep it visible in your island.</small><span class="card-arrow">↗</span>
+        </button>
+        <button class="feature-card weather-card" data-open="weather">
+          <span class="card-icon">☼</span><span class="card-kicker">OUTSIDE</span><strong>Weather</strong><small>Check current conditions for your location.</small><span class="card-arrow">↗</span>
+        </button>
+        <div class="feature-card note-card">
+          <span class="card-icon">⌘</span><span class="card-kicker">GOOD TO KNOW</span><strong>Made for iPad</strong><small>Add IslandPad to your Home Screen for an app-like experience.</small>
+        </div>
+      </div>
+      <div class="notice"><span>ⓘ</span><p>IslandPad is an independent web app. It cannot replace the iPad status bar or display Apple's system-wide Dynamic Island.</p></div>
+    </section>
+
+    <section class="view" id="view-music">
+      <div class="section-heading"><div><div class="eyebrow">NOW PLAYING</div><h2>Music</h2></div><span class="live-label"><i></i> PLAYER</span></div>
+      <div class="music-layout">
+        <div class="album-art" id="albumArt"><div class="album-glow"></div><div class="album-placeholder">♫</div></div>
+        <div class="track-info"><div class="eyebrow">YOUR LIBRARY</div><h3 id="trackTitle">Nothing playing</h3><p id="trackArtist">Choose an audio file to begin</p></div>
+        <div class="progress-area"><span id="currentTime">0:00</span><input type="range" id="seek" min="0" max="1000" value="0"><span id="duration">0:00</span></div>
+        <div class="player-controls">
+          <button class="round-control" id="prevBtn" aria-label="Previous track">↶</button>
+          <button class="play-control" id="playBtn" aria-label="Play">▶</button>
+          <button class="round-control" id="nextBtn" aria-label="Next track">↷</button>
+        </div>
+        <div class="visualizer" id="visualizer" aria-label="Audio visualizer"></div>
+        <label class="file-button">＋ Choose audio files<input type="file" id="audioFiles" accept="audio/*" multiple></label>
+        <div class="playlist" id="playlist"><div class="empty-state">Your selected tracks will appear here.</div></div>
+        <audio id="audio" preload="metadata"></audio>
+      </div>
+    </section>
+
+    <section class="view" id="view-timer">
+      <div class="section-heading"><div><div class="eyebrow">STAY IN THE MOMENT</div><h2>Timer & stopwatch</h2></div><span class="live-label"><i></i> ACTIVITY</span></div>
+      <div class="timer-card-large">
+        <div class="timer-mode"><button class="mode active" data-mode="timer">COUNTDOWN</button><button class="mode" data-mode="stopwatch">STOPWATCH</button></div>
+        <div class="timer-ring" id="timerRing"><div><strong id="timerDisplay">25:00</strong><span id="timerCaption">READY TO FOCUS</span></div></div>
+        <div class="timer-presets" id="presets">
+          <button data-min="5">5 min</button><button data-min="10">10 min</button><button data-min="15">15 min</button><button class="selected" data-min="25">25 min</button><button data-min="45">45 min</button><button data-min="60">60 min</button>
+        </div>
+        <div class="custom-time"><label for="customMinutes">Custom minutes</label><input type="number" id="customMinutes" min="1" max="180" value="25"></div>
+        <div class="timer-actions"><button class="primary-button" id="timerStart">Start focus</button><button class="secondary-button" id="timerReset">Reset</button></div>
+        <p class="fine-print" id="timerMessage">Keep this page open for the most reliable timer experience.</p>
+      </div>
+    </section>
+
+    <section class="view" id="view-weather">
+      <div class="section-heading"><div><div class="eyebrow">RIGHT NOW</div><h2>Weather</h2></div><span class="live-label"><i></i> LIVE DATA</span></div>
+      <div class="weather-panel">
+        <div class="weather-top"><div><div class="eyebrow" id="weatherPlace">YOUR LOCATION</div><div class="weather-temp" id="weatherTemp">--°</div><div class="weather-desc" id="weatherDesc">Allow location to check conditions</div></div><div class="weather-icon" id="weatherIcon">☼</div></div>
+        <div class="weather-metrics"><div><span>FEELS LIKE</span><strong id="feelsLike">--°</strong></div><div><span>WIND</span><strong id="wind">--</strong></div><div><span>HUMIDITY</span><strong id="humidity">--%</strong></div></div>
+        <button class="primary-button weather-button" id="weatherRefresh">Use my location</button>
+        <p class="fine-print">Weather is fetched from Open-Meteo. Your location is requested only when you tap the button.</p>
+      </div>
+    </section>
+
+    <footer><span>ISLANDPAD 1.0</span><span>AN INDEPENDENT IPAD EXPERIENCE</span></footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
